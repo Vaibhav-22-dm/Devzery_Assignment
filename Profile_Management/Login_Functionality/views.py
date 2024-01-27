@@ -11,6 +11,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .utils import token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse 
+from django.conf import settings
 
 @api_view(['POST'])
 def login(request):
@@ -52,7 +53,7 @@ def register(request):
             email = EmailMessage(
                 email_subject, #email subject
                 email_body, #email body
-                'itworksonlocal0@gmail.com', #email id from which we want to send mails
+                settings.EMAIL_HOST_USER, #email id from which we want to send mails
                 [user.email] #email id to whom we want to send the email
             )
             email.send(fail_silently=False)
@@ -109,12 +110,12 @@ def request_reset(request):
         domain = "localhost:3000/reset_password/"
         activate_url = 'http://' + domain + uidb64 + "/" + token_generator.make_token(user)
         email_subject = 'Rest your password'
-        email_body = 'Hi! ' + user.username + '\n\nPlease use this link to verify your account\n\n'+ activate_url
+        email_body = 'Hi! ' + user.username + '\n\nPlease use this link to reset your password\n\n'+ activate_url
         #EmailMessage is a class responsible for creating the email message itself. 
         email = EmailMessage(
             email_subject, #email subject
             email_body, #email body
-            'itworksonlocal0@gmail.com', #email id from which we want to send mails
+            settings.EMAIL_HOST_USER, #email id from which we want to send mails
             [user.email] #email id to whom we want to send the email
         )
         email.send(fail_silently=False)

@@ -1,6 +1,6 @@
 import { FormGroup, TextField, Button, Container } from '@mui/material';
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { request_reset, reset_password } from "../../api/requests";
 import Alert from '@mui/material/Alert';
 
@@ -75,6 +75,9 @@ const ResetPassword = () => {
                     <Button variant="outlined" color="secondary" type="submit" onClick={handleSubmit}>
                         {token ? "Update" : "Request"}
                     </Button>
+                    <small style={{ marginTop: "20px" }}>Reset Successful?
+                        <Link to="/login"> Login here</Link>
+                    </small>
                 </ FormGroup>
             </ Container>
         </>
