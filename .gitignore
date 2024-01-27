@@ -1,0 +1,5 @@
+./env
+profile_app/node_modules/
+Profile_Management/Login_Functionality/migrations/
+Profile_Management/db.sqlite3
+__pycache__
